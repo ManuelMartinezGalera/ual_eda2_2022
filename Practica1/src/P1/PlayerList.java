@@ -19,17 +19,16 @@ public class PlayerList {
 				
 			}
 			while(scan.hasNextLine()) {
-			line = scan.nextLine();
-			
+			line = scan.nextLine().replace(";;", ";0;");
 			if(line.isEmpty()) continue;
 			if(line.contains("PlayerName")) continue;
 			items = line.split(";");
-			int score = (int) ((Float.parseFloat(items[7]))*(Integer.parseInt(items[8]))/100);
+			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
 			players.add(new Player(items[2], items[6], items[4], score));
 			}
 	   }
 	public static void main(String[] args) {
 		loadFile("C:\\WORKSPACES\\EDAII2022\\Practica1\\src\\P1\\NbaStats.csv");
-		System.out.println(players);
+		System.out.println(players.size());
 	}
 }
