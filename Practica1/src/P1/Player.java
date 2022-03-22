@@ -19,7 +19,6 @@ public class Player{
         this.positions.add(position);
         this.score = score;
     }
-
     public String getPlayerName(){
         return this.playerName;
     }

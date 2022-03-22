@@ -10,6 +10,8 @@ public class PlayerList {
 			Scanner scan = null;
 			String line;
 			String[] items = null;
+			String name = "";
+			Player aux = null;
 			try {
 				scan = new Scanner(new File(file));
 			} catch (Exception e) {
@@ -24,9 +26,22 @@ public class PlayerList {
 			if(line.contains("PlayerName")) continue;
 			items = line.split(";");
 			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
-			players.add(new Player(items[2], items[6], items[4], score));
+			Player current = new Player(items[2], items[6], items[4], score);
+				if(name.equals(current.getPlayerName())) {
+				//Operaciones aux y curr
+				}else if(!name.equals(current.getPlayerName())){
+					players.add(aux);
+					aux = current;
+					name = current.getPlayerName();
+				} else if(name.equals("")) {
+					name = current.getPlayerName();
+					aux = current;
+				} else if(!scan.hasNextLine()) {
+					players.add(aux);
+				}
 			}
 	   }
+	//public void DyV() 
 	public static void main(String[] args) {
 		loadFile("C:\\WORKSPACES\\EDAII2022\\Practica1\\src\\P1\\NbaStats.csv");
 		System.out.println(players.size());
