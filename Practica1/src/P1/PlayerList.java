@@ -28,7 +28,12 @@ public class PlayerList {
 			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
 			Player current = new Player(items[2], items[6], items[4], score);
 				if(name.equals(current.getPlayerName())) {
-				//Operaciones aux y curr
+					if(aux.getPositions().equals(current.getPositions())) continue;
+						aux.getPositions().addAll(current.getPositions());
+					if(aux.getTeams().equals(current.getTeams())) continue;
+						aux.getTeams().addAll(current.getTeams());
+					int newScore = (aux.getScore()+ score)/2;
+					aux.setScore(newScore);
 				}else if(!name.equals(current.getPlayerName())){
 					players.add(aux);
 					aux = current;
@@ -43,7 +48,7 @@ public class PlayerList {
 	   }
 	//public void DyV() 
 	public static void main(String[] args) {
-		loadFile("C:\\WORKSPACES\\EDAII2022\\Practica1\\src\\P1\\NbaStats.csv");
+		loadFile("C:\\Users\\Manuel MG\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
 		System.out.println(players.size());
 	}
 }
