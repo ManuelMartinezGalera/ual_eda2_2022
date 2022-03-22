@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Player{
+public class Player implements Comparable<Player>{
 
     private String playerName;
     private ArrayList<String> teams;
@@ -46,6 +46,14 @@ public class Player{
     public void setScore(int score){
         this.score = score;
     
+    }
+    public int compareTo(Player o) {
+    	int result = 0;
+    	if(this.score < o.score)
+			result = -1;
+    	else if(this.score > o.score)
+			result = 1;
+		return result;
     }
 	
 }
