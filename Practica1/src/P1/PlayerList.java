@@ -28,10 +28,12 @@ public class PlayerList {
 			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
 			Player current = new Player(items[2], items[6], items[4], score);
 				if(name.equals(current.getPlayerName())) {
-					if(aux.getPositions().equals(current.getPositions())) continue;
+					if(!aux.getPositions().equals(current.getPositions())) {
 						aux.getPositions().addAll(current.getPositions());
-					if(aux.getTeams().equals(current.getTeams())) continue;
+					}
+					if(!aux.getTeams().equals(current.getTeams())) {
 						aux.getTeams().addAll(current.getTeams());
+					}
 					int newScore = (aux.getScore()+ score)/2;
 					aux.setScore(newScore);
 				}else if(!name.equals(current.getPlayerName())){
