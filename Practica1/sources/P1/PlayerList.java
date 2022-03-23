@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerList {
+	
 	static ArrayList<Player> players = new ArrayList<Player>();
-	   public static void loadFile(String file) {
+	public static int top;
+	public static String path = System.getProperty("user.dir")+File.separator+"sources"+File.separator+"P1"+File.separator+"NbaStats.csv";
+	   
+	public static void loadFile(String file) {
 			Scanner scan = null;
 			String line;
 			String[] items = null;
@@ -28,6 +32,7 @@ public class PlayerList {
 			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
 			Player current = new Player(items[2], items[6], items[4], score);
 			
+			//Filtro de judores para evitar repetidos y actualizar valores.
 			if(name.equals("")) {
                 name = current.getPlayerName();
                 aux = current;
@@ -52,6 +57,8 @@ public class PlayerList {
             }
 		}
 	  }
+	
+	//DyV
 	   public static void dividirArray(int start, int end) {
 
 	        if (start < end && (end - start) >= 1) {
@@ -68,8 +75,8 @@ public class PlayerList {
 
 	        int left = start;
 	        int right = mid + 1;
-
-	        while (left <= mid && right <= end) {
+	        
+	        while ((left <= mid && right <= end) || aux.size() == top) {
 
 	            if (players.get(left).compareTo(players.get(right)) == 0 || players.get(left).compareTo(players.get(right)) == -1) {
 
@@ -100,40 +107,44 @@ public class PlayerList {
 	        }
 
 	    }
+	
 	    
-	public static void posPlayer(ArrayList<Player> play) {
-		for (Player p : play) {
-			if(p.getPositions().isEmpty()) {
-				System.out.println("El array esta vacio");
-			}
-			System.out.println(p.getPositions());
-		}
-	}
-	   
-	   
-	public static void teamsPlayer(ArrayList<Player> play) {
-		for (Player p : play) {
-			System.out.println(p.getTeams());
-		}
-	}
-	public static void scorePlayer(ArrayList<Player> play) {
-		for (Player p : play) {
-			System.out.println(p.getScore());
-		}
-		
-	}
+	    //Codigo usado para mostrar info de los players
+//	
+//	public static void posPlayer(ArrayList<Player> play) {
+//		for (Player p : play) {
+//			if(p.getPositions().isEmpty()) {
+//				System.out.println("El array esta vacio");
+//			}
+//			System.out.println(p.getPositions());
+//		}
+//	}
+//	   
+//	   
+//	public static void teamsPlayer(ArrayList<Player> play) {
+//		for (Player p : play) {
+//			System.out.println(p.getTeams());
+//		}
+//	}
+//	public static void scorePlayer(ArrayList<Player> play) {
+//		for (Player p : play) {
+//			System.out.println(p.getScore());
+//		}
+//		
+//	}
+//	
+//	public static void namePlayer(ArrayList<Player> play) {
+//		for(Player p : play) {
+//			System.out.println(p.getPlayerName()+","+p.getPositions()+","+p.getTeams()+","+p.getScore());
+//		}
+//		
+//	}
 	
-	public static void namePlayer(ArrayList<Player> play) {
-		for(Player p : play) {
-			System.out.println(p.getPlayerName()+","+p.getPositions()+","+p.getTeams()+","+p.getScore());
-		}
-		
-	}
-	
+	//Metodo para devolver arraylist del top 10
 	public static ArrayList<Player> top10Players(ArrayList<Player> player) {
 		ArrayList<Player> aux10 = new ArrayList<Player>();
 		dividirArray(0,players.size()-1);
-		for (int i =0; i<10; i++) {
+		for (int i =0; i<top; i++) {
 			aux10.add(player.get(i));
 		}
 		
@@ -142,20 +153,19 @@ public class PlayerList {
 	}
 	
 	public static void main(String[] args) {
-		loadFile("C:\\Users\\Manuel MG\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
-		//loadFile("C:\\Users\\jef97\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
-		System.out.println(players.size());
+		loadFile(path);
+		top = 10;
 		System.out.println("Los 10 mejores jugadores de la NBA:");
+		long ini = System.nanoTime();
 		ArrayList<Player> sol = top10Players(players);
+		long end = System.nanoTime();
 		int i = 1;
 		for (Player p : sol) {
 			System.out.print(i+". "+ p.toString()+"\n");
 			i++;
 		}
-		//namePlayer(players);
-		//posPlayer(players);
-		//teamsPlayer(players);
-		//scorePlayer(players);
+		
+		System.out.println("El tiempo de ejecución fue: "+(end-ini)+" nanosegundos");
 		
 	}
 }
