@@ -32,7 +32,7 @@ public class PlayerList {
 			int score = (int) (Double.parseDouble(items[7].replace(",", "."))*(Integer.parseInt(items[8]))/100);
 			Player current = new Player(items[2], items[6], items[4], score);
 			
-			//Filtro de judores para evitar repetidos y actualizar valores.
+			//Filtro de jugadores para evitar repetidos y actualizar valores.
 			if(name.equals("")) {
                 name = current.getPlayerName();
                 aux = current;
