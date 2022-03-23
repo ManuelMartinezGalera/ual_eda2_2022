@@ -155,7 +155,7 @@ public class PlayerList {
 	public static void main(String[] args) {
 		loadFile(path);
 		top = 10;
-		System.out.println("Los 10 mejores jugadores de la NBA:");
+		System.out.println("Los "+top+" mejores jugadores de la NBA:");
 		long ini = System.nanoTime();
 		ArrayList<Player> sol = top10Players(players);
 		long end = System.nanoTime();
