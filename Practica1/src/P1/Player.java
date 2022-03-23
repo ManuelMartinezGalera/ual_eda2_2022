@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Player implements Comparable<Player>{
 
-    private String playerName;
+	private String playerName;
     private ArrayList<String> teams;
     private ArrayList<String> positions;
     private int score;
@@ -47,6 +47,12 @@ public class Player implements Comparable<Player>{
         this.score = score;
     
     }
+    
+    @Override
+  	public String toString() {
+  		return playerName + ": " + score;
+  	}
+    
     public int compareTo(Player o) {
     	int result = 0;
     	if(this.score < o.score)

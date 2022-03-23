@@ -73,23 +73,23 @@ public class PlayerList {
 
 	            if (players.get(left).compareTo(players.get(right)) == 0 || players.get(left).compareTo(players.get(right)) == -1) {
 
-	                aux.add(players.get(left));
-	                left++;
+	                aux.add(players.get(right));
+	                right++;
 
 	            } else {
 
-	                aux.add(players.get(right));
-	                right++;
+	                aux.add(players.get(left));
+	                left++;
 
 	            }
 	        }
 
-	        while (mid >= left) {
+	        while (left <= mid) {
 	        	aux.add(players.get(left));
 	            left++;
 	        }
 
-	        while (end >= mid) {
+	        while (right <= end) {
 	            aux.add(players.get(right));
 	            right++;
 	        }
@@ -130,14 +130,14 @@ public class PlayerList {
 		
 	}
 	
-	public static void top10Players(ArrayList<Player> player) {
+	public static ArrayList<Player> top10Players(ArrayList<Player> player) {
+		ArrayList<Player> aux10 = new ArrayList<Player>();
 		dividirArray(0,players.size()-1);
-//		for (Player player2 : player) {
-//			System.out.println(player2.getScore());
-//		}
 		for (int i =0; i<10; i++) {
-			System.out.println(i+1+"."+player.get(i).getPlayerName()+": "+player.get(i).getScore());
+			aux10.add(player.get(i));
 		}
+		
+		return aux10;
 		
 	}
 	
@@ -146,7 +146,12 @@ public class PlayerList {
 		//loadFile("C:\\Users\\jef97\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
 		System.out.println(players.size());
 		System.out.println("Los 10 mejores jugadores de la NBA:");
-		top10Players(players);
+		ArrayList<Player> sol = top10Players(players);
+		int i = 1;
+		for (Player p : sol) {
+			System.out.print(i+". "+ p.toString()+"\n");
+			i++;
+		}
 		//namePlayer(players);
 		//posPlayer(players);
 		//teamsPlayer(players);
