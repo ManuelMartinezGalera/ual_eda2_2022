@@ -45,22 +45,24 @@ public class PlayerList {
                 int newScore = (aux.getScore()+ score)/2;
                 aux.setScore(newScore);
 
-            }else if(!scan.hasNextLine()) {
+            }
+			
+			if(!scan.hasNextLine()) {
                 players.add(aux);
             }
 		}
 	  }
-	   public void dividirArray(int start, int end) {
+	   public static void dividirArray(int start, int end) {
 
 	        if (start < end && (end - start) >= 1) {
 	            int mid = (end + start) / 2;
 	            dividirArray(start, mid);
 	            dividirArray(mid + 1, end);
-	            mergeArrayElements(start, mid, end);
+	            mergeArray(start, mid, end);
 	        }
 	    }
 
-	    public void mergeArrayElements(int start, int mid, int end) {
+	    public static void mergeArray(int start, int mid, int end) {
 
 	        ArrayList<Player> aux = new ArrayList<Player>();
 
@@ -82,12 +84,12 @@ public class PlayerList {
 	            }
 	        }
 
-	        while (left <= mid) {
+	        while (mid >= left) {
 	        	aux.add(players.get(left));
 	            left++;
 	        }
 
-	        while (right <= end) {
+	        while (end >= mid) {
 	            aux.add(players.get(right));
 	            right++;
 	        }
@@ -98,6 +100,7 @@ public class PlayerList {
 	        }
 
 	    }
+	    
 	public static void posPlayer(ArrayList<Player> play) {
 		for (Player p : play) {
 			if(p.getPositions().isEmpty()) {
@@ -110,21 +113,44 @@ public class PlayerList {
 	   
 	public static void teamsPlayer(ArrayList<Player> play) {
 		for (Player p : play) {
-			System.out.println(p.getScore());
+			System.out.println(p.getTeams());
 		}
 	}
 	public static void scorePlayer(ArrayList<Player> play) {
 		for (Player p : play) {
-			System.out.println(p.getTeams());
+			System.out.println(p.getScore());
 		}
 		
 	}
+	
+	public static void namePlayer(ArrayList<Player> play) {
+		for(Player p : play) {
+			System.out.println(p.getPlayerName()+","+p.getPositions()+","+p.getTeams()+","+p.getScore());
+		}
+		
+	}
+	
+	public static void top10Players(ArrayList<Player> player) {
+		dividirArray(0,players.size()-1);
+//		for (Player player2 : player) {
+//			System.out.println(player2.getScore());
+//		}
+		for (int i =0; i<10; i++) {
+			System.out.println(i+1+"."+player.get(i).getPlayerName()+": "+player.get(i).getScore());
+		}
+		
+	}
+	
 	public static void main(String[] args) {
-		//loadFile("C:\\Users\\Manuel MG\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
-		loadFile("C:\\Users\\jef97\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
+		loadFile("C:\\Users\\Manuel MG\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
+		//loadFile("C:\\Users\\jef97\\git\\ual_eda2_2022\\Practica1\\src\\P1\\NbaStats.csv");
 		System.out.println(players.size());
-		posPlayer(players);
-		teamsPlayer(players);
-		scorePlayer(players);
+		System.out.println("Los 10 mejores jugadores de la NBA:");
+		top10Players(players);
+		//namePlayer(players);
+		//posPlayer(players);
+		//teamsPlayer(players);
+		//scorePlayer(players);
+		
 	}
 }
