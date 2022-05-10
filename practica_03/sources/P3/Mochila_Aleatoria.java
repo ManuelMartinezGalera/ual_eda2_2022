@@ -3,11 +3,10 @@ package P3;
 import java.util.ArrayList;
 
 public class Mochila_Aleatoria {
+private static final int[] ArrayList = null;
 static int w = 5; // Capacidad de la mochila
 static int n = 4; // Numero de elementos
 static ArrayList<Item> items = new ArrayList<Item>() ; //Array de los objetos
-static int[] val; // Array de valores
-static int[] wt; // Array de pesos
 
 
 public static void generarItems() {
@@ -18,9 +17,11 @@ public static void generarItems() {
 
 public static void cargarValoresyPesos() {
 	generarItems();
+	ArrayList<Integer> val = new ArrayList<Integer>(); // Array de valores
+	ArrayList<Integer> wt = new ArrayList<Integer>(); // Array de pesos
 	for (int i = 0; i < items.size(); i++) {
-		wt[i] = items.get(i).peso;
-		val[i] = items.get(i).valor;
+		wt.add(i, items.get(i).peso);
+		val.add(i, items.get(i).valor);
 	}
 }
 public int mochila (int w, int n, int[] val, int[] wt) {
