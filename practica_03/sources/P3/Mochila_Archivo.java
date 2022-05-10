@@ -113,9 +113,7 @@ public static void main(String[] args) {
 		System.out.println();
 		}
 	System.out.println("El profit optimo para la mochila es : "+mochila(w, n, val, wt));
-	
 	}	
-	
 }
 	
 
